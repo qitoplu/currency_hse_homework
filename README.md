@@ -1,7 +1,7 @@
 # **Как развернуть проект в локале:**
 
 * Клонировать репозиторий и перейти в директорию с проектом:
-> `git clone https://github.com/qitoplu/currency_hse_homework.git  
+> `git clone https://github.com/qitoplu/currency_hse_homework.git`
 > `cd currency`
 * Cоздать и активировать виртуальное окружение:
 > `python3 -m venv env`  
