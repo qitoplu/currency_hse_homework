@@ -8,35 +8,44 @@
     </head>
     <body>
         <h1>Конвертер валют</h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="input-group">
-                <label for="amount">Сумма:</label>
-                <input type="text" id="amount" name="amount" placeholder="Введите сумму">
-            </div>
-            <div class="input-group">
-                <label for="from">Из:</label>
-                <select id="from" name="from">
-                    {% for curr in currency %}
-                        <option value='{{ curr }}'{% if from == curr %}selected{% endif %}>{{ curr }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="input-group">
-                <label for="to">В:</label>
-                <select id="to" name="to">
-                    {% for curr in currency %}
-                        <option value='{{ curr }}'{% if to == curr %}selected{% endif %}>{{ curr }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit">Конвертировать</button>
-        </form>
-
-        {% if converter %}
+        {% if show_result %}
             <div class="result">
                 Результат: {{ converter }}
             </div>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="reset" value="true">Вернуться к форме</button>
+            </form>
+        {% else %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="amount">Сумма:</label>
+                    <input type="text" id="amount" name="amount" placeholder="Введите сумму">
+                </div>
+                <div class="input-group">
+                    <label for="from">Из:</label>
+                    <select id="from" name="from">
+                        {% for curr in currency %}
+                            <option value='{{ curr }}'{% if from == curr %}selected{% endif %}>{{ curr }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="to">В:</label>
+                    <select id="to" name="to">
+                        {% for curr in currency %}
+                            <option value='{{ curr }}'{% if to == curr %}selected{% endif %}>{{ curr }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% if converter %}
+                    <div class="result">
+                        Результат: {{ converter }}
+                    </div>
+                {% endif %}
+                <button type="submit" name="convert" value="true">Конвертировать</button>
+            </form>
         {% endif %}
     </body>
 </html>
